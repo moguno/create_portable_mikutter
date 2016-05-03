@@ -7,6 +7,8 @@ BASE=`pwd`
 TMP=$BASE/aventure
 DST=$BASE/portable_mikutter
 
+export HOME=$DST
+
 rm -rf $TMP
 rm -rf $DST
 
@@ -66,7 +68,7 @@ rm master.zip
 
 
 # Bundle
-PATH=$DST/ruby/bin:$PATH
+export PATH=$DST/ruby/bin:$PATH
 
 cd $DST/mikutter
 
