@@ -1,3 +1,3 @@
 set HOME=%CD%
-set PATH=%HOME%\bin;%PATH%;%CD%\ruby\bin
+set PATH=%HOME%\bin;%CD%\ruby\bin;%PATH%
 cmd 
