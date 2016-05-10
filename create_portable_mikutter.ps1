@@ -26,7 +26,7 @@ Move-Item "LICENSE.txt" (Join-Path $DST "ruby")
 
 
 #Install Mikutter
-wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.3.8.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
+wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.3.9.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
 
 Start-Process -FilePath $SevenZIP -ArgumentList "x", (Join-Path $TMP "mikutter.tar.gz") -Wait
 Start-Process -FilePath $SevenZIP -ArgumentList "x", (Join-Path $TMP "mikutter.tar") -Wait
