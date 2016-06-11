@@ -40,7 +40,7 @@ function みくったーのインストール
 {
     cd  $TMP
 
-    wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.3.10.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
+    wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.4.0.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
 
     & $SevenZIP "x" (Join-Path $TMP "mikutter.tar.gz")
     & $SevenZIP "x" (Join-Path $TMP "mikutter.tar")
