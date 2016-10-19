@@ -6,8 +6,9 @@ $TMP = Join-Path $BASE "aventure"
 $DST = Join-path $BASE "portable_mikutter"
 $LIB = Join-path $BASE "lib"
 $SevenZIP = Join-Path (Join-Path (Join-Path $BASE "tool") "7za920") "7za.exe"
-$Gem = Join-Path (Join-Path (Join-Path $DST "ruby") "bin") "gem.bat"
-$Bundle = Join-Path (Join-Path (Join-Path $DST "ruby") "bin") "bundle.bat"
+$Gem = Join-Path (Join-Path (Join-Path $DST "ruby") "bin") "gem.cmd"
+$GemUpdater = Join-Path (Join-Path (Join-Path $DST "ruby") "bin") "update_rubygems.bat"
+$Bundle = Join-Path (Join-Path (Join-Path $DST "ruby") "bin") "bundler.bat"
 
 function 環境変数の設定
 {
@@ -28,23 +29,27 @@ function Rubyのインストール
 {
     cd  $TMP
 
-    wget -Uri "http://dl.bintray.com/oneclick/rubyinstaller/ruby-2.2.4-i386-mingw32.7z" -OutFile (Join-Path $TMP "ruby.7z")
+    wget -Uri "http://dl.bintray.com/oneclick/rubyinstaller/ruby-2.3.1-i386-mingw32.7z" -OutFile (Join-Path $TMP "ruby.7z")
     & $SevenZIP "x", (Join-Path $TMP "ruby.7z")
-    Move-Item (Join-Path $TMP "ruby-2.2.4-i386-mingw32") (Join-Path $DST "ruby")
+    Move-Item (Join-Path $TMP "ruby-2.3.1-i386-mingw32") (Join-Path $DST "ruby")
 
-    wget -Uri "http://dl.bintray.com/oneclick/rubyinstaller/ruby-2.2.4-i386-mingw32.7z" -OutFile (Join-Path $TMP "LICENSE.txt")
-    Move-Item "LICENSE.txt" (Join-Path $DST "ruby")
+    & $Gem "install" "rubygems-update" "--source=http://rubygems.org"
+    & $GemUpdater
 }
 
 function みくったーのインストール
 {
     cd  $TMP
 
-    wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.4.1.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
+    wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.4.6.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
 
     & $SevenZIP "x" (Join-Path $TMP "mikutter.tar.gz")
     & $SevenZIP "x" (Join-Path $TMP "mikutter.tar")
     Move-Item "mikutter" (Join-Path $DST "mikutter")
+
+    # お前、まだあいつ(Linux)のことを・・・俺が忘れさせてやるよ！
+    # （vendorディレクトリにLinux用gemが入ってるのを削除する）
+    Remove-Item (Join-Path (Join-Path $DST "mikutter") "vendor") -Force -Recurse
 }
 
 function Packagedのインストール
