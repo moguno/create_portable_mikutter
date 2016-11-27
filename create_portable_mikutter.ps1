@@ -41,7 +41,7 @@ function みくったーのインストール
 {
     cd  $TMP
 
-    wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.4.6.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
+    wget -Uri "http://mikutter.hachune.net/bin/mikutter.3.4.8.tar.gz" -OutFile (Join-Path $TMP "mikutter.tar.gz")
 
     & $SevenZIP "x" (Join-Path $TMP "mikutter.tar.gz")
     & $SevenZIP "x" (Join-Path $TMP "mikutter.tar")
@@ -85,7 +85,7 @@ function Bundle
 
     cd (Join-Path $DST "mikutter")
 
-    & $Bundle
+    & $Bundle "--without" "test"
 }
 
 function スクリプト類のインストール
